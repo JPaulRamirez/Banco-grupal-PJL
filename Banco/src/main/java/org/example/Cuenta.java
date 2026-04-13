@@ -30,7 +30,7 @@ public class Cuenta {
         if (this.saldo >= monto)
         {
             this.saldo -= monto;
-            cuentaDestino.depositar(monto);
+            cuentaDestino.saldo += monto;
             System.out.println("Transferencia realizada");
         } else {
             System.out.println("Saldo insuficiente");

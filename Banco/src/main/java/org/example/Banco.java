@@ -8,8 +8,8 @@ public class Banco {
     public void crearCuentas()
     {
          cuenta1 = new Cuenta("Paul","Calle falsa 123","Ahorro");
-         cuenta2 = new Cuenta("Leonel","Calle falsa 444","Corriente");
-         cuenta3 = new Cuenta("Ariana","Calle falsa 233","Ahorro");
+         cuenta2 = new Cuenta("Leonel","Calle falsa 444","Ahorro");
+         cuenta3 = new Cuenta("Ariana","Calle falsa 233","Corriente");
     }
     public void modificarCuenta(Cuenta cuentaElegida,String nombre,String nuevaDirreccion)
     {
