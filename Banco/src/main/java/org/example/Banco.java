@@ -11,9 +11,19 @@ public class Banco {
          cuenta2 = new Cuenta("Leonel","Calle falsa 444","Corriente");
          cuenta3 = new Cuenta("Ariana","Calle falsa 233","Ahorro");
     }
+    public void modificarCuenta(Cuenta cuentaElegida,String nombre,String nuevaDirreccion)
+    {
+        cuentaElegida.nombre = nombre;
+        cuentaElegida.direccion = nuevaDirreccion;
+    }
+    public void eliminarCuenta(Cuenta cuentaElegida)
+    {
+        cuentaElegida=null;
+    }
+
 
     public void mostrarBalance() {
-        System.out.println("=== BALANCE GENERAL ===");
+        System.out.println("----- BALANCE GENERAL ----- ");
         cuenta1.mostrar();
         cuenta2.mostrar();
         cuenta3.mostrar();

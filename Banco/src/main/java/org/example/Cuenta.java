@@ -37,6 +37,7 @@ public class Cuenta {
         }
     }
 
+
     public void mostrar() {
         System.out.println("Nombre: " + this.nombre);
         //System.out.println("Direccion: " + this.direccion);
@@ -44,4 +45,6 @@ public class Cuenta {
         System.out.println("Saldo: $" + this.saldo);
         System.out.println("----------------------");
     }
+
+
 }
