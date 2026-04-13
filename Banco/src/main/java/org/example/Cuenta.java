@@ -43,8 +43,8 @@ public class Cuenta {
 
     public void mostrar() {
         System.out.println("Nombre: " + this.nombre);
-        //System.out.println("Direccion: " + this.direccion);
-        //System.out.println("Tipo de cuenta: " + this.tipoCuenta);
+        System.out.println("Direccion: " + this.direccion);
+        System.out.println("Tipo de cuenta: " + this.tipoCuenta);
         System.out.println("Saldo: $" + this.saldo);
         System.out.println("----------------------");
     }
