@@ -31,7 +31,10 @@ public class Cuenta {
         {
             this.saldo -= monto;
             cuentaDestino.saldo += monto;
-            System.out.println("Transferencia realizada");
+            System.out.println("Transferencia realizada: $" + monto +
+                    " de " + this.nombre +
+                    " a " + cuentaDestino.nombre);
+            System.out.println("----------------------");
         } else {
             System.out.println("Saldo insuficiente");
         }
