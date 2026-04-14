@@ -1,4 +1,8 @@
 package org.example;
+import org.example.strategy.CuentaAhorro;
+import org.example.strategy.CuentaCorriente;
+import org.example.strategy.CuentaPremium;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -7,9 +11,9 @@ public class Banco {
 
     public void crearCuentas()
     {
-        cuentas.add(new Cuenta("Paul","Calle falsa 123","Ahorro",1));
-        cuentas.add(new Cuenta("Leonel","Calle falsa 444","Ahorro",2));
-        cuentas.add(new Cuenta("Ariana","Calle falsa 233","Corriente",3));
+        cuentas.add(new Cuenta("Paul", "Calle 123", "Ahorro", 1, new CuentaAhorro()));
+        cuentas.add(new Cuenta("Ana", "Calle 456", "Corriente", 2, new CuentaCorriente()));
+        cuentas.add(new Cuenta("Luis", "Calle 789", "Premium", 3, new CuentaPremium()));
         System.out.println("----------- Cuentas creadas -----------");
     }
     public void modificarCuenta(int dni, String nombre, String nuevaDireccion) {
@@ -32,10 +36,6 @@ public class Banco {
     }
     public void transferir(int dniOrigen, int dniDestino, double monto) {
 
-        if (dniOrigen == dniDestino) {
-            System.out.println("No podés transferirte a la misma cuenta");
-            return;
-        }
         Cuenta origen = buscarPorDni(dniOrigen);
         Cuenta destino = buscarPorDni(dniDestino);
 

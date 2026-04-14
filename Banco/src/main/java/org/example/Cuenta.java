@@ -1,4 +1,5 @@
 package org.example;
+import org.example.strategy.TipoCuentaStrategy;
 
 public class Cuenta {
     public String nombre;
@@ -6,13 +7,15 @@ public class Cuenta {
     public String tipoCuenta;
     public int dni;
     public double saldo;
+    private TipoCuentaStrategy estrategia;
 
-    public Cuenta(String nombre, String direccion, String tipoCuenta,int dni) {
+    public Cuenta(String nombre, String direccion, String tipoCuenta, int dni, TipoCuentaStrategy estrategia) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.tipoCuenta = tipoCuenta;
         this.dni = dni;
         this.saldo = 0;
+        this.estrategia = estrategia;
     }
 
     public void depositar(double monto) {
@@ -28,18 +31,21 @@ public class Cuenta {
 
     }
 
-    public void transferirCuenta(Cuenta cuentaDestino, double monto) {
-        if (this.saldo >= monto)
-        {
-            this.saldo -= monto;
-            cuentaDestino.saldo += monto;
-            System.out.println("Transferencia realizada: $" + monto +
-                    " de " + this.nombre +
-                    " a " + cuentaDestino.nombre);
-            System.out.println("----------------------");
-        } else {
-            System.out.println("Saldo insuficiente");
+    public void transferirCuenta(Cuenta destino, double monto) {
+
+        if (monto <= 0) {
+            System.out.println("Monto inválido");
+            return;
         }
+        if (!estrategia.puedeTransferir(saldo, monto)) {
+            System.out.println("No permitido según tipo de cuenta o supera el limite de descubierto");
+            return;
+        }
+
+        saldo -= monto;
+        destino.saldo += monto;
+
+        System.out.println("Transferencia realizada");
     }
 
 
