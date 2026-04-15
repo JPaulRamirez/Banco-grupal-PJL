@@ -26,8 +26,14 @@ public class Sucursal {
     }
 
     public void registrarCuenta(Cuenta cuenta) {
-        cuentas.add(cuenta);
-        System.out.println("Cuenta creada en sucursal " + nombre);
+        Cuenta cuentaExistente = buscarPorDni(cuenta.dni);
+
+        if (cuentaExistente != null) {
+            System.out.println("Existe una cuenta con este DNI");
+        } else {
+            cuentas.add(cuenta);
+            System.out.println("Cuenta creada en sucursal " + nombre);
+        }
     }
 
     public void eliminarCuenta(Cuenta cuenta) {
