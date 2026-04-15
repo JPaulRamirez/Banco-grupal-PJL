@@ -42,7 +42,7 @@ public class MenuAdmin {
 
         int opcion = 0;
 
-        while (opcion != 8) {
+        while (opcion != 7) {
 
             System.out.println("\n=== MENU ADMIN ===");
             System.out.println("1. Crear cuenta");
@@ -75,6 +75,7 @@ public class MenuAdmin {
                         System.out.println("1. Ahorro");
                         System.out.println("2. Corriente");
                         System.out.println("3. Premium");
+                        System.out.print("\nSeleccione una opcion: ");
 
                         int tipo = sc.nextInt();
 
@@ -93,7 +94,7 @@ public class MenuAdmin {
                                 break;
                             default:
                                 System.out.println("Opcion invalida");
-                                return; // 🔥 clave
+                                return;
                         }
                         Cuenta c = new Cuenta(nombreC, dir, tipoCuenta, dni, estrategia);
                         sucursal.registrarCuenta(c);
@@ -138,6 +139,9 @@ public class MenuAdmin {
 
                     case 6:
                         System.out.println("Saldo total: $" + sucursal.consultarSaldoTotal());
+                        break;
+                    case 7:
+                        System.out.println("Saliendo del menu admin...");
                         break;
                     default:
                         System.out.println("Opcion invalida.");
