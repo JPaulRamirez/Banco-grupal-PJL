@@ -1,20 +1,19 @@
 package org.example.Modelo;
+import org.example.enums.Rol;
 import org.example.enums.TipoCuenta;
 import org.example.strategy.TipoCuentaStrategy;
 
-public class Cuenta {
-    public String nombre;
+public class Cuenta extends Usuario{
     public String direccion;
     public TipoCuenta tipoCuenta;
-    public int dni;
     public double saldo;
     private TipoCuentaStrategy estrategia;
 
     public Cuenta(String nombre, String direccion, TipoCuenta tipoCuenta, int dni, TipoCuentaStrategy estrategia) {
-        this.nombre = nombre;
+        super(nombre, dni, Rol.CLIENTE);
+
         this.direccion = direccion;
         this.tipoCuenta = tipoCuenta;
-        this.dni = dni;
         this.saldo = 0;
         this.estrategia = estrategia;
     }
