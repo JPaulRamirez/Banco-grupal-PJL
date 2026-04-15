@@ -10,7 +10,6 @@ public class MenuPrincipal {
         this.banco.inicializarBanco();
         this.sc = new Scanner(System.in);
     }
-
     public void iniciar() {
 
         int opcion = 0;
