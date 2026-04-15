@@ -102,9 +102,9 @@ public class MenuAdmin {
 
                 case 2:
                     System.out.print("DNI: ");
-                    int dniElim = sc.nextInt();
+                    int dniElimina = sc.nextInt();
 
-                    Cuenta cuenta = sucursal.buscarPorDni(dniElim);
+                    Cuenta cuenta = sucursal.buscarPorDni(dniElimina);
                     if (cuenta != null) {
                         sucursal.eliminarCuenta(cuenta);
                     }
