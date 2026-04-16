@@ -14,9 +14,4 @@ public class Usuario {
         this.dni = dni ;
         this.rol =rol;
     }
-    public void mostrarDatos() {
-        System.out.println("Nombre: " + nombre);
-        System.out.println("DNI: " + dni);
-    }
-
 }
