@@ -1,4 +1,4 @@
-package org.example.bancoJosue;// ============================================================
+package org.example.bancoJosue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class Banco {
     }
 
 
-    public Cuenta buscarCuenta(String dni) {
+    public Cuenta buscarCuenta(int dni) {
         for (Sucursal s : sucursales) {
             Cuenta c = s.buscarCuenta(dni);   // Le pregunta a cada sucursal
             if (c != null) return c;           // Si la encontró, la devuelve
