@@ -47,4 +47,13 @@ public class Banco {
             System.out.println("- " + s.nombre);
         }
     }
+    public Cuenta buscarCuentaGlobal(int dni) {
+
+        for (Sucursal s : sucursales) {
+            Cuenta c = s.buscarPorDni(dni);
+            if (c != null) return c;
+        }
+
+        return null;
+    }
 }
