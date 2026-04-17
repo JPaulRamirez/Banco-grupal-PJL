@@ -1,4 +1,4 @@
-package org.example.enums;
+package org.example.bancoPaul.enums;
 
 public enum Rol {
     ADMIN,

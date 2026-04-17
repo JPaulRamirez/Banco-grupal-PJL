@@ -1,6 +1,6 @@
-package org.example;
-import org.example.Modelo.Admin;
-import org.example.Modelo.Cuenta;
+package org.example.bancoPaul;
+import org.example.bancoPaul.Modelo.Admin;
+import org.example.bancoPaul.Modelo.Cuenta;
 import java.util.ArrayList;
 import java.util.List;
 

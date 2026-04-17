@@ -1,7 +1,7 @@
-package org.example.Modelo;
-import org.example.enums.Rol;
-import org.example.enums.TipoCuenta;
-import org.example.strategy.TipoCuentaStrategy;
+package org.example.bancoPaul.Modelo;
+import org.example.bancoPaul.enums.Rol;
+import org.example.bancoPaul.enums.TipoCuenta;
+import org.example.bancoPaul.strategy.TipoCuentaStrategy;
 
 public class Cuenta extends Usuario{
     public String direccion;

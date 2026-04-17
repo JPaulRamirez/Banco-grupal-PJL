@@ -1,7 +1,6 @@
-package org.example;
+package org.example.bancoPaul;
 
-
-import org.example.menu.MenuPrincipal;
+import org.example.bancoPaul.menu.MenuPrincipal;
 
 public class Main {
     public static void main( String[] args) {

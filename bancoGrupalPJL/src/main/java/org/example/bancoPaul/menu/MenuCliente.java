@@ -1,7 +1,7 @@
-package org.example.menu;
-import org.example.Banco;
-import org.example.Modelo.Cuenta;
-import org.example.Sucursal;
+package org.example.bancoPaul.menu;
+import org.example.bancoPaul.Banco;
+import org.example.bancoPaul.Modelo.Cuenta;
+import org.example.bancoPaul.Sucursal;
 
 import java.util.Scanner;
 

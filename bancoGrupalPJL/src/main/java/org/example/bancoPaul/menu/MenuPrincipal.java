@@ -1,6 +1,6 @@
-package org.example.menu;
+package org.example.bancoPaul.menu;
 
-import org.example.Banco;
+import org.example.bancoPaul.Banco;
 
 import java.util.Scanner;
 public class MenuPrincipal {

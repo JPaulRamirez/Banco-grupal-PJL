@@ -1,10 +1,10 @@
-package org.example;
-import org.example.Modelo.Cuenta;
-import org.example.Modelo.Admin;
-import org.example.enums.Rol;
-import org.example.enums.TipoCuenta;
-import org.example.strategy.CuentaAhorro;
-import org.example.strategy.CuentaCorriente;
+package org.example.bancoPaul;
+import org.example.bancoPaul.Modelo.Cuenta;
+import org.example.bancoPaul.Modelo.Admin;
+import org.example.bancoPaul.enums.Rol;
+import org.example.bancoPaul.enums.TipoCuenta;
+import org.example.bancoPaul.strategy.CuentaAhorro;
+import org.example.bancoPaul.strategy.CuentaCorriente;
 
 import java.util.List;
 import java.util.ArrayList;

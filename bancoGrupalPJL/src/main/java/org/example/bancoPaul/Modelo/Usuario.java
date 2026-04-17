@@ -1,6 +1,6 @@
-package org.example.Modelo;
+package org.example.bancoPaul.Modelo;
 
-import org.example.enums.Rol;
+import org.example.bancoPaul.enums.Rol;
 
 public class Usuario {
 

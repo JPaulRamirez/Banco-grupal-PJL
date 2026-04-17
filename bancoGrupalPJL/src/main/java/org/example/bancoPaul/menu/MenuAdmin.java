@@ -1,12 +1,12 @@
-package org.example.menu;
-import org.example.Banco;
-import org.example.Modelo.Cuenta;
-import org.example.Sucursal;
-import org.example.enums.TipoCuenta;
-import org.example.strategy.CuentaAhorro;
-import org.example.strategy.CuentaCorriente;
-import org.example.strategy.CuentaPremium;
-import org.example.strategy.TipoCuentaStrategy;
+package org.example.bancoPaul.menu;
+import org.example.bancoPaul.Banco;
+import org.example.bancoPaul.Modelo.Cuenta;
+import org.example.bancoPaul.Sucursal;
+import org.example.bancoPaul.enums.TipoCuenta;
+import org.example.bancoPaul.strategy.CuentaAhorro;
+import org.example.bancoPaul.strategy.CuentaCorriente;
+import org.example.bancoPaul.strategy.CuentaPremium;
+import org.example.bancoPaul.strategy.TipoCuentaStrategy;
 
 import java.util.Scanner;
 public class MenuAdmin {
