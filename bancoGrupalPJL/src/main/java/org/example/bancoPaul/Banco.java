@@ -47,4 +47,17 @@ public class Banco {
             System.out.println("- " + s.nombre);
         }
     }
+
+    public List<Sucursal> getSucursales() {
+        return sucursales;
+    }
+
+
+    public void mostrarTodo() {
+        for (Sucursal s : sucursales) {
+            s.mostrarCuentas();
+        }
+    }
+
+
 }
