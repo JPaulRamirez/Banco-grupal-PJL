@@ -18,6 +18,26 @@ public class Cuenta {
         System.out.println(">>> Deposito exitoso.");
     }
 
+    public void acreditar(double monto) {
+        if (monto <= 0) {
+            throw new IllegalArgumentException("El monto a acreditar debe ser mayor que cero.");
+        }
+        this.saldo += monto;
+    }
+
+    public void debitar(double monto) {
+        if (monto <= 0) {
+            throw new IllegalArgumentException("El monto a debitar debe ser mayor que cero.");
+        }
+        if (!"ACTIVA".equalsIgnoreCase(estado)) {
+            throw new IllegalStateException("La cuenta no esta activa.");
+        }
+        if (monto > this.saldo) {
+            throw new IllegalStateException("No hay fondos suficientes.");
+        }
+        this.saldo -= monto;
+    }
+
     public void retirar(double monto) {
         if (monto <= this.saldo) {
             this.saldo -= monto;
@@ -31,5 +51,4 @@ public class Cuenta {
     public String toString() {
         return "Tipo: " + tipo + " | ESTADO: " + estado + " | Titular: " + titular.toString() + " | CBU: " + cbu + " | Saldo: $" + saldo;
     }
-
 }

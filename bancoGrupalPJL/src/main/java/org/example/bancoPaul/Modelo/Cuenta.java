@@ -1,4 +1,5 @@
 package org.example.bancoPaul.Modelo;
+
 import org.example.bancoPaul.enums.Rol;
 import org.example.bancoPaul.enums.TipoCuenta;
 import org.example.bancoPaul.strategy.TipoCuentaStrategy;
@@ -31,14 +32,31 @@ public class Cuenta extends Usuario{
 
     }
 
+    public void acreditar(double monto) {
+        if (monto <= 0) {
+            throw new IllegalArgumentException("El monto a acreditar debe ser mayor que cero.");
+        }
+        this.saldo += monto;
+    }
+
+    public void debitar(double monto) {
+        if (monto <= 0) {
+            throw new IllegalArgumentException("El monto a debitar debe ser mayor que cero.");
+        }
+        if (!estrategia.puedeTransferir(saldo, monto)) {
+            throw new IllegalStateException("Saldo insuficiente o la cuenta no permite ese debito.");
+        }
+        this.saldo -= monto;
+    }
+
     public void transferirCuenta(Cuenta destino, double monto) {
 
         if (monto <= 0) {
-            System.out.println("Monto inválido");
+            System.out.println("Monto invalido");
             return;
         }
         if (!estrategia.puedeTransferir(saldo, monto)) {
-            System.out.println("No permitido según tipo de cuenta o supera el limite de descubierto");
+            System.out.println("No permitido segun tipo de cuenta o supera el limite de descubierto");
             return;
         }
 
@@ -55,6 +73,7 @@ public class Cuenta extends Usuario{
         if(!estrategia.puedeTransferir(saldo,monto))
         {
             System.out.println("No esta permitido o saldo insuficiente");
+            return;
         }
         saldo-=monto;
         System.out.println("Extracion realizada : $"+monto);
@@ -68,6 +87,4 @@ public class Cuenta extends Usuario{
         System.out.println("Saldo: $" + this.saldo);
         System.out.println("----------------------");
     }
-
-
 }
