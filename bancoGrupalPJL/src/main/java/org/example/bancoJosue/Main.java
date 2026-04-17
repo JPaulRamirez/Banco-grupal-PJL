@@ -70,7 +70,7 @@ public class Main {
     // ── Login usuario ──────────────────────────────────────────
     static void loginUsuario() {
         System.out.print("DNI: ");
-        String dni = sc.nextLine().trim();
+        int dni = Integer.parseInt(sc.nextLine().trim());
 
         Cuenta cuenta = banco.buscarCuenta(dni);
         if (cuenta == null) {
@@ -156,7 +156,7 @@ public class Main {
 
 
         System.out.print("DNI del titular: ");
-        String dni = sc.nextLine().trim();
+        int dni = Integer.parseInt(sc.nextLine().trim());
         if (banco.buscarCuenta(dni) != null) {
             System.out.println("Ya existe una cuenta con ese DNI.");
             return;
@@ -176,8 +176,11 @@ public class Main {
 
     static void editarCuenta() {
         banco.mostrarTodo();
+
         System.out.print("DNI de la cuenta a editar: ");
-        Cuenta cuenta = banco.buscarCuenta(sc.nextLine().trim());
+        int dni = Integer.parseInt(sc.nextLine().trim());
+
+        Cuenta cuenta = banco.buscarCuenta(dni);
         if (cuenta == null) {
             System.out.println("Cuenta no encontrada.");
             return;
@@ -200,12 +203,16 @@ public class Main {
 
     static void darDeBajaCuenta() {
         banco.mostrarTodo();
+
         System.out.print("DNI de la cuenta a dar de baja: ");
-        Cuenta cuenta = banco.buscarCuenta(sc.nextLine().trim());
+        int dni = Integer.parseInt(sc.nextLine().trim());
+
+        Cuenta cuenta = banco.buscarCuenta(dni);
         if (cuenta == null) {
             System.out.println("Cuenta no encontrada.");
             return;
         }
+
         cuenta.darDeBaja();
     }
 
@@ -237,12 +244,14 @@ public class Main {
             case 4:
                 // Transferir a otra cuenta (busca por DNI destino)
                 System.out.print("DNI de la cuenta destino: ");
-                Cuenta destino = banco.buscarCuenta(sc.nextLine().trim());
+                int dniDestino = Integer.parseInt(sc.nextLine().trim());
+
+                Cuenta destino = banco.buscarCuenta(dniDestino);
                 if (destino == null) {
                     System.out.println("Cuenta destino no encontrada.");
                     return;
                 }
-                if (destino.dni.equals(cuenta.dni)) {
+                if (destino.dni == cuenta.dni) {
                     System.out.println("No puede transferir a su propia cuenta.");
                     return;
                 }

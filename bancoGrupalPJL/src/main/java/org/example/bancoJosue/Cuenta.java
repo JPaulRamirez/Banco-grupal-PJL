@@ -7,7 +7,7 @@ public class Cuenta {
 
 
 
-    String  dni;
+    int  dni;
     String  tipo;
     double  saldo;
     boolean activa;
@@ -20,7 +20,7 @@ public class Cuenta {
 
 
     // Se crea la cuenta con un DNI, tipo, saldo inicial, sucursal y titular
-    public Cuenta(String dni, String tipo, String nombreSucursal, Usuario titular) {
+    public Cuenta(int dni, String tipo, String nombreSucursal, Usuario titular) {
         this.dni            = dni;
         this.tipo           = tipo;
         this.saldo          = 0;
@@ -59,6 +59,7 @@ public class Cuenta {
             return;
         }
         saldo -= monto;
+
         movimientos.add("Retiro: -$" + monto + "  |  Saldo: $" + saldo);
         System.out.println("Retiro exitoso. Saldo actual: $" + saldo);
     }

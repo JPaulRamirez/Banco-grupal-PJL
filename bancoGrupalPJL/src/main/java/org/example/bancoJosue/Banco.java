@@ -1,4 +1,5 @@
-package org.example.bancoJosue;// ============================================================
+package org.example.bancoJosue;
+// ============================================================
 //  CLASE: Banco
 //  Es la raíz del patrón Composite. Contiene sucursales,
 //  que a su vez contienen cuentas.
@@ -59,19 +60,21 @@ public class Banco {
 
     // Busca una cuenta por DNI en TODAS las sucursales
     // Esto permite transferencias entre sucursales distintas
-    public Cuenta buscarCuenta(String dni) {
+    public Cuenta buscarCuenta(int dni) {
         for (Sucursal s : sucursales) {
-            Cuenta c = s.buscarCuenta(dni);   // Le pregunta a cada sucursal
-            if (c != null) return c;           // Si la encontró, la devuelve
+            for (Cuenta c : s.cuentas) {
+                if (c.dni == dni) {
+                    return c;
+                }
+            }
         }
-        return null;   // No se encontró en ninguna sucursal
+        return null;
     }
-
 
 
     // Muestra solo los nombres de las sucursales, sin info de cuentas
     // Se usa en el menú público para no exponer datos privados
-    public void mostrarSoloSucursales() {
+    public void mostrarSoloSucursales () {
         System.out.println("===== " + nombre + " =====");
         System.out.println("Sucursales disponibles:");
         for (Sucursal s : sucursales) {
@@ -81,7 +84,7 @@ public class Banco {
 
     // Muestra toda la estructura del banco: sucursales y sus cuentas
     // Gracias al Composite, con un solo llamado se recorre todo el árbol
-    public void mostrarTodo() {
+    public void mostrarTodo () {
         System.out.println("===== " + nombre + " =====");
 
         if (sucursales.isEmpty()) {

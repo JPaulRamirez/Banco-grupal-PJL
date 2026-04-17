@@ -16,11 +16,9 @@ public class Sucursal {
     }
 
 
-
-
-    public Cuenta buscarCuenta(String dni) {
+    public Cuenta buscarCuenta(int dni) {
         for (Cuenta c : cuentas) {
-            if (c.dni.equalsIgnoreCase(dni)) {
+            if (c.dni == dni) {
                 return c;
             }
         }
