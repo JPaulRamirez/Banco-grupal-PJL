@@ -18,6 +18,28 @@ public class Banco {
         sucursales.add(new Sucursal("Sucursal 1"));
         sucursales.add(new Sucursal("Sucursal 2"));
         sucursales.add(new Sucursal("Sucursal 3"));
+
+
+        Sucursal s1 = sucursales.get(0);
+        Sucursal s2 = sucursales.get(1);
+
+        s1.cuentas.add(new Cuenta(
+                11111111,
+                "Ahorro",
+                s1.nombre,
+                new Usuario("Juan", "Perez", "mail", "1234")
+        ));
+
+        s2.cuentas.add(new Cuenta(
+                22222222,
+                "Corriente",
+                s2.nombre,
+                new Usuario("Ana", "Gomez", "mail", "1234")
+        ));
+
+        // opcional: darles saldo
+        s1.cuentas.get(0).saldo = 2000;
+        s2.cuentas.get(0).saldo = 3000;
     }
 
 
