@@ -1,122 +1,74 @@
 package org.example;
 
+import org.example.bancoJosue.BancoJosueSimple;
+import org.example.bancoLourdes.BancoLourdesSimple;
+import org.example.bancoPaul.BancoPaulSimple;
+
 import java.util.Scanner;
 
 public class MainGrupal {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         MediadorBancario mediador = new MediadorBancario();
-        //mediador.registrarBanco(new BancoPaulMediatorAdapter());
-        //mediador.registrarBanco(new BancoJosueMediatorAdapter());
-        //mediador.registrarBanco(new BancoLourdesMediatorAdapter());
 
-        Scanner scanner = new Scanner(System.in);
-        int opcion;
+        mediador.registrarBanco(new BancoPaulSimple());
+        mediador.registrarBanco(new BancoJosueSimple());
+        mediador.registrarBanco(new BancoLourdesSimple());
 
-        do {
-            mostrarMenu();
-            opcion = leerEntero(scanner, "Seleccione una opcion: ");
+        int op = -1;
 
-            switch (opcion) {
-                case 1 -> mostrarGuiaDePrueba();
-                case 2 -> consultarSaldo(scanner, mediador);
-                case 3 -> transferir(scanner, mediador);
-                case 0 -> System.out.println("Sistema finalizado.");
-                default -> System.out.println("Opcion invalida.");
-            }
-        } while (opcion != 0);
-    }
+        while (op != 0) {
+            System.out.println("\n==== BANCO GRUPAL ====");
+            System.out.println("1. Ver datos");
+            System.out.println("2. Ver saldo");
+            System.out.println("3. Transferir");
+            System.out.println("0. Salir");
+            System.out.print("Opcion: ");
+            op = Integer.parseInt(sc.nextLine());
 
-    private static void mostrarMenu() {
-        System.out.println();
-        System.out.println("===============================================");
-        System.out.println("              BANCO GRUPAL - MEDIATOR");
-        System.out.println("===============================================");
-        System.out.println("1. Ver datos de prueba");
-        System.out.println("2. Consultar saldo por banco, sucursal y DNI");
-        System.out.println("3. Transferencia interbancaria");
-        System.out.println("0. Salir");
-    }
+            if (op == 1) {
+                System.out.println("BancoPaul: Centro -> 1, 2 | Norte -> 3, 4");
+                System.out.println("BancoJosue: Centro -> 1001, 1002 | Norte -> 1003");
+                System.out.println("BancoLourdes: Centro -> 2001 | Norte -> 2002");
+            } else if (op == 2) {
+                System.out.print("Banco: ");
+                String banco = sc.nextLine();
+                System.out.print("Sucursal: ");
+                String sucursal = sc.nextLine();
+                System.out.print("DNI: ");
+                int dni = Integer.parseInt(sc.nextLine());
 
-    private static void mostrarGuiaDePrueba() {
-        System.out.println();
-        System.out.println("Bancos registrados:");
-        System.out.println("- BancoPaul: Centro -> DNI 1, 2 | Norte -> DNI 3, 4");
-        System.out.println("- BancoJosue: Centro -> DNI 1001, 1002 | Norte -> DNI 1003 | Sur -> DNI 1004");
-        System.out.println("- BancoLourdes: Centro -> DNI 44965002, 12345678 | Norte -> DNI 2001, 2002");
-    }
+                try {
+                    System.out.println("Saldo: $" + mediador.consultarSaldo(banco, sucursal, dni));
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            } else if (op == 3) {
+                System.out.print("Banco origen: ");
+                String bancoOrigen = sc.nextLine();
+                System.out.print("Sucursal origen: ");
+                String sucursalOrigen = sc.nextLine();
+                System.out.print("DNI origen: ");
+                int dniOrigen = Integer.parseInt(sc.nextLine());
 
-    private static void consultarSaldo(Scanner scanner, MediadorBancario mediador) {
-        String banco = leerTexto(scanner, "Banco: ");
-        String sucursal = leerTexto(scanner, "Sucursal: ");
-        int dni = leerEntero(scanner, "DNI: ");
+                System.out.print("Banco destino: ");
+                String bancoDestino = sc.nextLine();
+                System.out.print("Sucursal destino: ");
+                String sucursalDestino = sc.nextLine();
+                System.out.print("DNI destino: ");
+                int dniDestino = Integer.parseInt(sc.nextLine());
 
-        try {
-            double saldo = mediador.consultarSaldo(banco, sucursal, dni);
-            System.out.printf("Saldo disponible: $%.2f%n", saldo);
-        } catch (IllegalArgumentException ex) {
-            System.out.println("No fue posible consultar el saldo: " + ex.getMessage());
-        }
-    }
+                System.out.print("Monto: ");
+                double monto = Double.parseDouble(sc.nextLine());
 
-    private static void transferir(Scanner scanner, MediadorBancario mediador) {
-        System.out.println();
-        System.out.println("Datos del cliente origen");
-        String bancoOrigen = leerTexto(scanner, "Banco origen: ");
-        String sucursalOrigen = leerTexto(scanner, "Sucursal origen: ");
-        int dniOrigen = leerEntero(scanner, "DNI origen: ");
+                String r = mediador.transferir(bancoOrigen, sucursalOrigen, dniOrigen, bancoDestino, sucursalDestino, dniDestino, monto);
+                System.out.println(r);
 
-        System.out.println();
-        System.out.println("Datos del cliente destino");
-        String bancoDestino = leerTexto(scanner, "Banco destino: ");
-        String sucursalDestino = leerTexto(scanner, "Sucursal destino: ");
-        int dniDestino = leerEntero(scanner, "DNI destino: ");
-
-        double monto = leerDouble(scanner, "Monto: ");
-
-        TransferenciaResultado resultado = mediador.transferir(
-                bancoOrigen,
-                sucursalOrigen,
-                dniOrigen,
-                bancoDestino,
-                sucursalDestino,
-                dniDestino,
-                monto
-        );
-
-        System.out.println(resultado.getMensaje());
-        if (resultado.isExitosa()) {
-            System.out.printf("Nuevo saldo origen: $%.2f%n", mediador.consultarSaldo(bancoOrigen, sucursalOrigen, dniOrigen));
-            System.out.printf("Nuevo saldo destino: $%.2f%n", mediador.consultarSaldo(bancoDestino, sucursalDestino, dniDestino));
-        }
-    }
-
-    private static String leerTexto(Scanner scanner, String etiqueta) {
-        System.out.print(etiqueta);
-        return scanner.nextLine().trim();
-    }
-
-    private static int leerEntero(Scanner scanner, String etiqueta) {
-        while (true) {
-            System.out.print(etiqueta);
-            String valor = scanner.nextLine().trim();
-            try {
-                return Integer.parseInt(valor);
-            } catch (NumberFormatException ex) {
-                System.out.println("Ingrese un numero entero valido.");
+                if (r.equals("Transferencia realizada")) {
+                    System.out.println("Saldo origen: $" + mediador.consultarSaldo(bancoOrigen, sucursalOrigen, dniOrigen));
+                    System.out.println("Saldo destino: $" + mediador.consultarSaldo(bancoDestino, sucursalDestino, dniDestino));
+                }
             }
         }
-    }
-
-    private static double leerDouble(Scanner scanner, String etiqueta) {
-        while (true) {
-            System.out.print(etiqueta);
-            String valor = scanner.nextLine().trim();
-            try {
-                return Double.parseDouble(valor);
-            } catch (NumberFormatException ex) {
-                System.out.println("Ingrese un monto valido.");
-            }
-        }
-
     }
 }

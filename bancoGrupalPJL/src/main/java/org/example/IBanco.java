@@ -2,9 +2,8 @@ package org.example;
 
 public interface IBanco {
     String getNombre();
-    boolean existeCliente(String idSucursal, int dni);
-    double consultarSaldo(String idSucursal, int dni);
-    void acreditar(String idSucursal, int dni, double monto);
-    void debitar(String idSucursal, int dni, double monto);
-    String describirCliente(String idSucursal, int dni);
+    boolean existeCliente(String sucursal, int dni);
+    double consultarSaldo(String sucursal, int dni);
+    void acreditar(String sucursal, int dni, double monto);
+    void debitar(String sucursal, int dni, double monto);
 }

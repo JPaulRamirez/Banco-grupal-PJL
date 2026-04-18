@@ -1,68 +1,52 @@
 package org.example;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class MediadorBancario {
-    private final Map<String, IBanco> bancosRegistrados = new HashMap<>();
+    Map<String, IBanco> bancos = new HashMap<>();
 
     public void registrarBanco(IBanco banco) {
-        bancosRegistrados.put(normalizarClave(banco.getNombre()), banco);
+        bancos.put(banco.getNombre().toLowerCase(), banco);
     }
 
-    public TransferenciaResultado transferir(
-            String bancoOrigen,
-            String sucursalOrigen,
-            int dniOrigen,
-            String bancoDestino,
-            String sucursalDestino,
-            int dniDestino,
-            double monto
-    ) {
+    public String transferir(String bancoOrigen, String sucursalOrigen, int dniOrigen,
+                             String bancoDestino, String sucursalDestino, int dniDestino,
+                             double monto) {
         if (monto <= 0) {
-            return TransferenciaResultado.error("El monto debe ser mayor que cero.");
+            return "Monto invalido";
         }
 
-        IBanco origen = bancosRegistrados.get(normalizarClave(bancoOrigen));
-        IBanco destino = bancosRegistrados.get(normalizarClave(bancoDestino));
+        IBanco origen = bancos.get(bancoOrigen.toLowerCase());
+        IBanco destino = bancos.get(bancoDestino.toLowerCase());
 
-        if (origen == null) {
-            return TransferenciaResultado.error("El banco origen no esta registrado.");
+        if (origen == null || destino == null) {
+            return "Uno de los bancos no existe";
         }
-        if (destino == null) {
-            return TransferenciaResultado.error("El banco destino no esta registrado.");
-        }
+
         if (!origen.existeCliente(sucursalOrigen, dniOrigen)) {
-            return TransferenciaResultado.error("No se encontro el cliente origen en " + bancoOrigen + ".");
+            return "No existe el cliente origen";
         }
+
         if (!destino.existeCliente(sucursalDestino, dniDestino)) {
-            return TransferenciaResultado.error("No se encontro el cliente destino en " + bancoDestino + ".");
+            return "No existe el cliente destino";
         }
 
         try {
             origen.debitar(sucursalOrigen, dniOrigen, monto);
             destino.acreditar(sucursalDestino, dniDestino, monto);
-        } catch (IllegalArgumentException | IllegalStateException ex) {
-            return TransferenciaResultado.error(ex.getMessage());
+        } catch (Exception e) {
+            return e.getMessage();
         }
 
-        String mensaje = String.format(
-                "Transferencia exitosa de $%.2f desde %s hacia %s.",
-                monto,
-                origen.describirCliente(sucursalOrigen, dniOrigen),
-                destino.describirCliente(sucursalDestino, dniDestino)
-        );
-        return TransferenciaResultado.ok(mensaje);
+        return "Transferencia realizada";
     }
 
     public double consultarSaldo(String banco, String sucursal, int dni) {
-        IBanco bancoConsultado = bancosRegistrados.get(normalizarClave(banco));
-        if (bancoConsultado == null) {
-            throw new IllegalArgumentException("El banco indicado no esta registrado.");
+        IBanco b = bancos.get(banco.toLowerCase());
+        if (b == null) {
+            throw new IllegalArgumentException("Banco no encontrado");
         }
-        return bancoConsultado.consultarSaldo(sucursal, dni);
-    }
-
-    private String normalizarClave(String valor) {
-        return valor.trim().toLowerCase();
+        return b.consultarSaldo(sucursal, dni);
     }
 }
