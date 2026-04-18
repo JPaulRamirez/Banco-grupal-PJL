@@ -42,6 +42,7 @@ public class MenuPrincipal {
                         break;
                     default:
                         System.out.println("Opcion invalida.");
+                        break;
                 }
 
             } else {
