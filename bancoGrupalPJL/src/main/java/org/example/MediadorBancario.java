@@ -43,10 +43,13 @@ public class MediadorBancario {
     }
 
     public double consultarSaldo(String banco, String sucursal, int dni) {
-        IBanco b = bancos.get(banco.toLowerCase());
-        if (b == null) {
-            throw new IllegalArgumentException("Banco no encontrado");
+        IBanco bancoElegido = bancos.get(banco.toLowerCase());
+
+        if(bancoElegido==null)
+        {
+            System.out.println("El banco no existe.");
+            return 0;
         }
-        return b.consultarSaldo(sucursal, dni);
+        return bancoElegido.consultarSaldo(sucursal, dni);
     }
 }
