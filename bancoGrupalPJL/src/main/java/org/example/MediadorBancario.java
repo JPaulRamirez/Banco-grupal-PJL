@@ -31,13 +31,10 @@ public class MediadorBancario {
         if (!destino.existeCliente(sucursalDestino, dniDestino)) {
             return "No existe el cliente destino";
         }
+        
+        origen.debitar(sucursalOrigen, dniOrigen, monto);
+        destino.acreditar(sucursalDestino, dniDestino, monto);
 
-        try {
-            origen.debitar(sucursalOrigen, dniOrigen, monto);
-            destino.acreditar(sucursalDestino, dniDestino, monto);
-        } catch (Exception e) {
-            return e.getMessage();
-        }
 
         return "Transferencia realizada";
     }
