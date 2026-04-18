@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SucursalSimple {
-    String nombre;
-    List<Cuenta> cuentas;
+    public String nombre;
+    public List<Cuenta> cuentas;
 
     public SucursalSimple(String nombre) {
         this.nombre = nombre;

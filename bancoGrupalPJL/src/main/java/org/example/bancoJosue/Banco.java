@@ -27,7 +27,7 @@ public class Banco {
     // ----------------------------------------------------------
 
     String nombre;                      // Nombre del banco (ej: "Banco DINO")
-    List<Sucursal> sucursales;          // Lista de todas las sucursales
+    public List<Sucursal> sucursales;          // Lista de todas las sucursales
 
     // ----------------------------------------------------------
     //  CONSTRUCTOR

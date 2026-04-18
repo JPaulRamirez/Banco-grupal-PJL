@@ -1,11 +1,14 @@
-package org.example.bancoJosue;
+package org.example;
 
-import org.example.IBanco;
+import org.example.bancoJosue.Banco;
+import org.example.bancoJosue.Cuenta;
+import org.example.bancoJosue.Sucursal;
+import org.example.bancoJosue.Usuario;
 
-public class BancoJosueSimple implements IBanco {
+public class AdaptadorBancoJosue implements IBanco {
     Banco banco;
 
-    public BancoJosueSimple() {
+    public AdaptadorBancoJosue() {
         banco = new Banco("BancoJosue");
         banco.sucursales.clear();
 

@@ -1,14 +1,16 @@
-package org.example.bancoLourdes;
+package org.example;
 
-import org.example.IBanco;
+import org.example.bancoLourdes.Cuenta;
+import org.example.bancoLourdes.Persona;
+import org.example.bancoLourdes.SucursalSimple;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BancoLourdesSimple implements IBanco {
+public class AdaptadorBancoLourdes implements IBanco {
     List<SucursalSimple> sucursales;
 
-    public BancoLourdesSimple() {
+    public AdaptadorBancoLourdes() {
         sucursales = new ArrayList<>();
 
         SucursalSimple centro = new SucursalSimple("Centro");

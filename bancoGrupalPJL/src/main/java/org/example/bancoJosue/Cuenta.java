@@ -6,7 +6,7 @@ import java.util.List;
 public class Cuenta {
     int dni;
     String tipo;
-    double saldo;
+    public double saldo;
     boolean activa;
     String nombreSucursal;
     Usuario titular;

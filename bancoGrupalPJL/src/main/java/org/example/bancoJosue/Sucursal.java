@@ -7,7 +7,7 @@ public class Sucursal {
 
 
     String nombre;
-    List<Cuenta> cuentas;
+    public List<Cuenta> cuentas;
 
 
     public Sucursal(String nombre) {

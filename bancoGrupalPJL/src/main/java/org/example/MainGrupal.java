@@ -1,9 +1,5 @@
 package org.example;
 
-import org.example.bancoJosue.BancoJosueSimple;
-import org.example.bancoLourdes.BancoLourdesSimple;
-import org.example.bancoPaul.BancoPaulSimple;
-
 import java.util.Scanner;
 
 public class MainGrupal {
@@ -11,9 +7,9 @@ public class MainGrupal {
         Scanner sc = new Scanner(System.in);
         MediadorBancario mediador = new MediadorBancario();
 
-        mediador.registrarBanco(new BancoPaulSimple());
-        mediador.registrarBanco(new BancoJosueSimple());
-        mediador.registrarBanco(new BancoLourdesSimple());
+        mediador.registrarBanco(new AdaptadorBancoPaul());
+        mediador.registrarBanco(new AdaptadorBancoJosue());
+        mediador.registrarBanco(new AdaptadorBancoLourdes());
 
         int op = -1;
 

@@ -3,7 +3,7 @@ package org.example.bancoLourdes;
 public class Cuenta {
     Persona titular;
     String tipo, cbu, estado;
-    double saldo;
+    public double saldo;
 
     public Cuenta(Persona titular, String tipo, String cbu) {
         this.titular = titular;

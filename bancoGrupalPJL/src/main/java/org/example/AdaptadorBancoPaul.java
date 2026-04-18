@@ -1,12 +1,13 @@
-package org.example.bancoPaul;
+package org.example;
 
-import org.example.IBanco;
+import org.example.bancoPaul.Banco;
+import org.example.bancoPaul.Sucursal;
 import org.example.bancoPaul.Modelo.Cuenta;
 
-public class BancoPaulSimple implements IBanco {
+public class AdaptadorBancoPaul implements IBanco {
     Banco banco;
 
-    public BancoPaulSimple() {
+    public AdaptadorBancoPaul() {
         banco = new Banco();
         banco.inicializarBanco();
         banco.buscarSucursal("Centro").depositar(1, 7000);
