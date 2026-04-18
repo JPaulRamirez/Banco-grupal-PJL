@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class Banco {
     private final List<Sucursal> sucursales = new ArrayList<>();
+
     public void inicializarBanco() {
 
         Admin admin1 = new Admin("Paul", 12345678, Rol.ADMIN, "paul@mail.com", "Paul", "Paul123" );
@@ -31,6 +32,16 @@ public class Banco {
         System.out.println("Banco inicializado con 2 sucursales");
     }
 
+    public void cargarDatosPrueba() {
+        if (buscarSucursal("Centro") == null) {
+            inicializarBanco();
+        }
+
+        buscarSucursal("Centro").depositar(1, 7000);
+        buscarSucursal("Centro").depositar(2, 5000);
+        buscarSucursal("Norte").depositar(3, 9000);
+        buscarSucursal("Norte").depositar(4, 2000);
+    }
 
     public Sucursal buscarSucursal(String nombre) {
         for (Sucursal s : sucursales) {
@@ -40,6 +51,38 @@ public class Banco {
         }
         return null;
     }
+
+    public boolean existeCliente(String sucursal, int dni) {
+        Sucursal s = buscarSucursal(sucursal);
+        if (s == null) return false;
+        return s.buscarPorDni(dni) != null;
+    }
+
+    public double consultarSaldo(String sucursal, int dni) {
+        Sucursal s = buscarSucursal(sucursal);
+        if (s == null) throw new IllegalArgumentException("Sucursal no encontrada");
+        Cuenta c = s.buscarPorDni(dni);
+        if (c == null) throw new IllegalArgumentException("Cliente no encontrado");
+        return c.saldo;
+    }
+
+    public void acreditar(String sucursal, int dni, double monto) {
+        Sucursal s = buscarSucursal(sucursal);
+        if (s == null) throw new IllegalArgumentException("Sucursal no encontrada");
+        Cuenta c = s.buscarPorDni(dni);
+        if (c == null) throw new IllegalArgumentException("Cliente no encontrado");
+        c.saldo += monto;
+    }
+
+    public void debitar(String sucursal, int dni, double monto) {
+        Sucursal s = buscarSucursal(sucursal);
+        if (s == null) throw new IllegalArgumentException("Sucursal no encontrada");
+        Cuenta c = s.buscarPorDni(dni);
+        if (c == null) throw new IllegalArgumentException("Cliente no encontrado");
+        if (c.saldo < monto) throw new IllegalArgumentException("Saldo insuficiente");
+        c.saldo -= monto;
+    }
+
     public void mostrarSucursales() {
         System.out.println("=== SUCURSALES DISPONIBLES ===");
 
