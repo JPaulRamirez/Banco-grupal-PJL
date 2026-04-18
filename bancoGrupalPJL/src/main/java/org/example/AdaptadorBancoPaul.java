@@ -14,6 +14,10 @@ public class AdaptadorBancoPaul implements IBanco {
         return "BancoPaul";
     }
 
+    public String getDatos() {
+        return banco.getDatos();
+    }
+
     public boolean existeCliente(String sucursal, int dni) {
         return banco.existeCliente(sucursal, dni);
     }

@@ -82,6 +82,27 @@ public class Banco {
         if (c.saldo < monto) throw new IllegalArgumentException("Saldo insuficiente");
         c.saldo -= monto;
     }
+    public String getDatos() {
+        String texto = "BancoPaul: ";
+
+        for (int i = 0; i < sucursales.size(); i++) {
+            Sucursal sucursal = sucursales.get(i);
+            texto += sucursal.nombre + " -> DNI ";
+
+            for (int j = 0; j < sucursal.cuentas.size(); j++) {
+                texto += sucursal.cuentas.get(j).dni;
+                if (j < sucursal.cuentas.size() - 1) {
+                    texto += ", ";
+                }
+            }
+
+            if (i < sucursales.size() - 1) {
+                texto += " | ";
+            }
+        }
+
+        return texto;
+    }
 
     public void mostrarSucursales() {
         System.out.println("=== SUCURSALES DISPONIBLES ===");

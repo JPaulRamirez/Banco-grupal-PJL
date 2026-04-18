@@ -14,6 +14,11 @@ public class AdaptadorBancoLourdes implements IBanco {
         return "BancoLourdes";
     }
 
+    public String getDatos()
+    {
+        return admin.getDatos();
+    }
+
     public boolean existeCliente(String sucursal, int dni) {
         return admin.existeCliente(sucursal, dni);
     }

@@ -13,6 +13,10 @@ public class AdaptadorBancoJosue implements IBanco {
     public String getNombre() {
         return "BancoJosue";
     }
+    public String getDatos()
+    {
+        return banco.getDatos();
+    }
 
     public boolean existeCliente(String sucursal, int dni) {
         return banco.existeCliente(sucursal, dni);

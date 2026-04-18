@@ -7,24 +7,27 @@ public class MainGrupal {
         Scanner sc = new Scanner(System.in);
         MediadorBancario mediador = new MediadorBancario();
 
-        mediador.registrarBanco(new AdaptadorBancoPaul());
-        mediador.registrarBanco(new AdaptadorBancoJosue());
-        mediador.registrarBanco(new AdaptadorBancoLourdes());
+        IBanco bancoPaul = new AdaptadorBancoPaul();
+        IBanco bancoJosue = new AdaptadorBancoJosue();
+        IBanco bancoLourdes = new AdaptadorBancoLourdes();
 
+        mediador.registrarBanco(bancoPaul);
+        mediador.registrarBanco(bancoJosue);
+        mediador.registrarBanco(bancoLourdes);
         int op = 0;
 
         while (op != 4) {
             System.out.println("\n==== BIENVENIDO A RED BANCARIA PJL GRUPAL ====");
-            System.out.println("1. Ver datos");
-            System.out.println("2. Ver saldo");
-            System.out.println("3. Transferir");
+            System.out.println("1. Ver datos de banco");
+            System.out.println("2. Ver saldo de cliente por banco ,sucursal y Dni");
+            System.out.println("3. Transferencia interbancaria");
             System.out.println("4. Salir");
 
             op = leerEntero(sc, "Opcion: ");
 
             switch (op) {
                 case 1:
-                    mostrarDatos();
+                    mostrarDatos(bancoPaul,bancoJosue,bancoLourdes);
                     break;
 
                 case 2:
@@ -48,11 +51,11 @@ public class MainGrupal {
         sc.close();
     }
 
-    private static void mostrarDatos() {
+    private static void mostrarDatos(IBanco bancoPaul,IBanco bancoJosue, IBanco bancoLourdes) {
         System.out.println("\n=== BANCOS REGISTRADOS ===");
-        System.out.println("1. BancoPaul: Centro -> DNI 1, 2 | Norte -> DNI 3, 4");
-        System.out.println("2. BancoJosue: Centro -> DNI 1001, 1002 | Norte -> DNI 1003");
-        System.out.println("3. BancoLourdes: Centro -> DNI 2001 | Norte -> DNI 2002");
+        System.out.println("1. "+ bancoPaul.getDatos());
+        System.out.println("2. "+ bancoJosue.getDatos());
+        System.out.println("3. "+ bancoLourdes.getDatos());
     }
 
     private static void consultarSaldo(Scanner sc, MediadorBancario mediador) {
