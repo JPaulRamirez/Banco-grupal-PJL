@@ -19,12 +19,10 @@ public class Banco {
         Sucursal suc1 = new Sucursal("Centro", admin1);
         Sucursal suc2 = new Sucursal("Norte", admin2);
         // Sucursal Centro
-        suc1.registrarCuenta(new Cuenta("Pepito", "Calle 123", TipoCuenta.AHORRO, 1, new CuentaAhorro()));
-        suc1.registrarCuenta(new Cuenta("Ana", "Calle 456", TipoCuenta.CORRIENTE, 2, new CuentaCorriente()));
+        suc1.registrarCuenta(new Cuenta("Pepito", "Calle 123", TipoCuenta.AHORRO, 1010, new CuentaAhorro()));
 
         // Sucursal Norte
-        suc2.registrarCuenta(new Cuenta("Luis", "Calle 789", TipoCuenta.AHORRO, 3, new CuentaAhorro()));
-        suc2.registrarCuenta(new Cuenta("Maria", "Calle 123", TipoCuenta.CORRIENTE, 4, new CuentaCorriente()));
+        suc2.registrarCuenta(new Cuenta("Luis", "Calle 789", TipoCuenta.AHORRO, 1011, new CuentaAhorro()));
 
         sucursales.add(suc1);
         sucursales.add(suc2);
@@ -36,11 +34,8 @@ public class Banco {
         if (buscarSucursal("Centro") == null) {
             inicializarBanco();
         }
-
-        buscarSucursal("Centro").depositar(1, 7000);
-        buscarSucursal("Centro").depositar(2, 5000);
-        buscarSucursal("Norte").depositar(3, 9000);
-        buscarSucursal("Norte").depositar(4, 2000);
+        buscarSucursal("Centro").depositar(1010, 7000);
+        buscarSucursal("Norte").depositar(1011, 9000);
     }
 
     public Sucursal buscarSucursal(String nombre) {
