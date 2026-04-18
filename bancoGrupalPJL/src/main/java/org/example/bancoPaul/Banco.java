@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Banco {
-    private List<Sucursal> sucursales = new ArrayList<>();
+    private final List<Sucursal> sucursales = new ArrayList<>();
     public void inicializarBanco() {
 
         Admin admin1 = new Admin("Paul", 12345678, Rol.ADMIN, "paul@mail.com", "Paul", "Paul123" );
