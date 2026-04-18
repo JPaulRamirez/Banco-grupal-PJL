@@ -59,28 +59,51 @@ public class Banco {
     }
 
     public double consultarSaldo(String sucursal, int dni) {
-        Sucursal s = buscarSucursal(sucursal);
-        if (s == null) throw new IllegalArgumentException("Sucursal no encontrada");
-        Cuenta c = s.buscarPorDni(dni);
-        if (c == null) throw new IllegalArgumentException("Cliente no encontrado");
+        Cuenta c = obtenerCuenta(sucursal, dni);
+
+        if (c == null) return 0;
+
         return c.saldo;
     }
 
     public void acreditar(String sucursal, int dni, double monto) {
-        Sucursal s = buscarSucursal(sucursal);
-        if (s == null) throw new IllegalArgumentException("Sucursal no encontrada");
-        Cuenta c = s.buscarPorDni(dni);
-        if (c == null) throw new IllegalArgumentException("Cliente no encontrado");
+        Cuenta c = obtenerCuenta(sucursal, dni);
+
+        if (c == null) return;
+
         c.saldo += monto;
+        System.out.println("Deposito realizado");
     }
 
     public void debitar(String sucursal, int dni, double monto) {
-        Sucursal s = buscarSucursal(sucursal);
-        if (s == null) throw new IllegalArgumentException("Sucursal no encontrada");
-        Cuenta c = s.buscarPorDni(dni);
-        if (c == null) throw new IllegalArgumentException("Cliente no encontrado");
-        if (c.saldo < monto) throw new IllegalArgumentException("Saldo insuficiente");
+        Cuenta c = obtenerCuenta(sucursal, dni);
+
+        if (c == null) return;
+
+        if (c.saldo < monto) {
+            System.out.println("Saldo insuficiente");
+            return;
+        }
+
         c.saldo -= monto;
+        System.out.println("Extraccion realizada");
+    }
+    private Cuenta obtenerCuenta(String sucursal, int dni) {
+        Sucursal buscarSucursal = buscarSucursal(sucursal);
+
+        if (buscarSucursal == null) {
+            System.out.println("Sucursal no encontrada");
+            return null;
+        }
+
+        Cuenta buscarCuentaPorDni = buscarSucursal.buscarPorDni(dni);
+
+        if (buscarCuentaPorDni == null) {
+            System.out.println("Cliente no encontrado");
+            return null;
+        }
+
+        return buscarCuentaPorDni;
     }
     public String getDatos() {
         String texto = "BancoPaul: ";
