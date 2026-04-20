@@ -21,8 +21,8 @@ public class Banco {
     public void cargarDatosPrueba() {
         sucursales.clear();
 
-        Sucursal centro = new Sucursal("Lanus");
-        Sucursal norte = new Sucursal("Avellaneda");
+        Sucursal centro = new Sucursal("Centro");
+        Sucursal norte = new Sucursal("Norte");
 
         Usuario u1 = new Usuario("Josue", "Lopez", "a", "1");
         Usuario u2 = new Usuario("Mia", "Perez", "b", "1");

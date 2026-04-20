@@ -60,8 +60,8 @@ Administradora {
         historial.clear();
         sucursales.clear();
 
-        SucursalSimple parquePatricio = new SucursalSimple("Parque Patricio");
-        SucursalSimple Balvanera = new SucursalSimple("Balvanera");
+        SucursalSimple Centro = new SucursalSimple("Centro");
+        SucursalSimple Norte = new SucursalSimple("Norte");
 
         Persona p1 = new Persona.Builder().setNombre("Lourdes").setDni("2001").setDomicilio("Calle 1").build();
         Persona p2 = new Persona.Builder().setNombre("Ana").setDni("2002").setDomicilio("Calle 2").build();
@@ -72,14 +72,14 @@ Administradora {
         c1.saldo = 4000;
         c2.saldo = 7500;
 
-        parquePatricio.cuentas.add(c1);
-        Balvanera.cuentas.add(c2);
+        Centro.cuentas.add(c1);
+        Norte.cuentas.add(c2);
 
         mapaCuentas.put("001", c1);
         mapaCuentas.put("002", c2);
 
-        sucursales.add(parquePatricio);
-        sucursales.add(Balvanera);
+        sucursales.add(Centro);
+        sucursales.add(Norte);
     }
 
     public SucursalSimple buscarSucursal(String nombre) {
