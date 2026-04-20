@@ -7,4 +7,6 @@ public interface IBanco {
     double consultarSaldo(String sucursal, int dni);
     void acreditar(String sucursal, int dni, double monto);
     void debitar(String sucursal, int dni, double monto);
+
+
 }

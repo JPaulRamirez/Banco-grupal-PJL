@@ -7,13 +7,15 @@ public class Sucursal {
 
 
     String nombre;
-    public List<Cuenta> cuentas;
+    List<Cuenta> cuentas;
 
 
     public Sucursal(String nombre) {
         this.nombre  = nombre;
         this.cuentas = new ArrayList<Cuenta>();
     }
+
+
 
 
     public Cuenta buscarCuenta(int dni) {

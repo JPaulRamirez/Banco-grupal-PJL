@@ -19,13 +19,11 @@ public class Sesion {
     }
 
 
-
     public void iniciarComoAdmin() {
         logueado     = true;
         rol          = ROL_ADMIN;
         cuentaActiva = null;
     }
-
 
     public void iniciarComoUsuario(Cuenta cuenta) {
         logueado     = true;
@@ -33,14 +31,12 @@ public class Sesion {
         cuentaActiva = cuenta;
     }
 
-
     public void cerrar() {
         logueado     = false;
         rol          = null;
         cuentaActiva = null;
         System.out.println("Sesión cerrada.");
     }
-
 
     public boolean esAdmin() {
         return logueado && rol.equals(ROL_ADMIN);

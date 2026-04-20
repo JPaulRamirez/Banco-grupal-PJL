@@ -5,44 +5,43 @@ import java.util.List;
 
 public class Banco {
 
+
+
     String nombre;
-    public List<Sucursal> sucursales;
+    List<Sucursal> sucursales;
 
 
     public Banco(String nombre) {
         this.nombre     = nombre;
         this.sucursales = new ArrayList<Sucursal>();
 
-        sucursales.add(new Sucursal("Sucursal 1"));
-        sucursales.add(new Sucursal("Sucursal 2"));
-        sucursales.add(new Sucursal("Sucursal 3"));
+        sucursales.add(new Sucursal("Centro"));
+        sucursales.add(new Sucursal("Norte"));
+
+
+        Sucursal s1 = sucursales.get(0);
+        Sucursal s2 = sucursales.get(1);
+
+        s1.cuentas.add(new Cuenta(
+                11111111,
+                "Ahorro",
+                s1.nombre,
+                new Usuario("Juan", "Perez", "mail", "1234")
+        ));
+
+        s2.cuentas.add(new Cuenta(
+                22222222,
+                "Corriente",
+                s2.nombre,
+                new Usuario("Ana", "Gomez", "mail", "1234")
+        ));
+
+        s1.cuentas.get(0).saldo = 2000;
+        s2.cuentas.get(0).saldo = 3000;
     }
 
-    public void cargarDatosPrueba() {
-        sucursales.clear();
 
-        Sucursal centro = new Sucursal("Centro");
-        Sucursal norte = new Sucursal("Norte");
 
-        Usuario u1 = new Usuario("Josue", "Lopez", "a", "1");
-        Usuario u2 = new Usuario("Mia", "Perez", "b", "1");
-        Usuario u3 = new Usuario("Leo", "Gomez", "c", "1");
-
-        Cuenta c1 = new Cuenta(1001, "Ahorro", "Centro", u1);
-        Cuenta c2 = new Cuenta(1002, "Corriente", "Centro", u2);
-        Cuenta c3 = new Cuenta(1003, "Ahorro", "Norte", u3);
-
-        c1.saldo = 6000;
-        c2.saldo = 3000;
-        c3.saldo = 8000;
-
-        centro.cuentas.add(c1);
-        centro.cuentas.add(c2);
-        norte.cuentas.add(c3);
-
-        sucursales.add(centro);
-        sucursales.add(norte);
-    }
 
     public Sucursal buscarSucursal(String nombre) {
         for (Sucursal s : sucursales) {
@@ -53,72 +52,18 @@ public class Banco {
         return null;
     }
 
-    public boolean existeCliente(String sucursal, int dni) {
-        Sucursal s = buscarSucursal(sucursal);
-        if (s == null) return false;
-        return s.buscarCuenta(dni) != null;
-    }
-
-    public double consultarSaldo(String sucursal, int dni) {
-        Sucursal s = buscarSucursal(sucursal);
-        if (s == null) throw new IllegalArgumentException("Sucursal no encontrada");
-        Cuenta c = s.buscarCuenta(dni);
-        if (c == null) throw new IllegalArgumentException("Cliente no encontrado");
-        return c.saldo;
-    }
-
-    public void acreditar(String sucursal, int dni, double monto) {
-        Sucursal s = buscarSucursal(sucursal);
-        if (s == null) throw new IllegalArgumentException("Sucursal no encontrada");
-        Cuenta c = s.buscarCuenta(dni);
-        if (c == null) throw new IllegalArgumentException("Cliente no encontrado");
-        c.saldo += monto;
-    }
-
-    public void debitar(String sucursal, int dni, double monto) {
-        Sucursal s = buscarSucursal(sucursal);
-        if (s == null) throw new IllegalArgumentException("Sucursal no encontrada");
-        Cuenta c = s.buscarCuenta(dni);
-        if (c == null) throw new IllegalArgumentException("Cliente no encontrado");
-        if (c.saldo < monto) throw new IllegalArgumentException("Saldo insuficiente");
-        c.saldo -= monto;
-    }
 
     public Cuenta buscarCuenta(int dni) {
         for (Sucursal s : sucursales) {
-            for (Cuenta c : s.cuentas) {
-                if (c.dni == dni) {
-                    return c;
-                }
-            }
+            Cuenta c = s.buscarCuenta(dni);   // Le pregunta a cada sucursal
+            if (c != null) return c;           // Si la encontró, la devuelve
         }
-        return null;
-    }
-    public String getDatos() {
-        String texto = nombre + ": ";
-
-        for (int i = 0; i < sucursales.size(); i++) {
-            Sucursal sucursal = sucursales.get(i);
-            texto += sucursal.nombre + " -> DNI ";
-
-            for (int j = 0; j < sucursal.cuentas.size(); j++) {
-                texto += sucursal.cuentas.get(j).dni;
-                if (j < sucursal.cuentas.size() - 1) {
-                    texto += ", ";
-                }
-            }
-
-            if (i < sucursales.size() - 1) {
-                texto += " | ";
-            }
-        }
-
-        return texto;
+        return null;   // No se encontró en ninguna sucursal
     }
 
 
 
-    public void mostrarSoloSucursales () {
+    public void mostrarSoloSucursales() {
         System.out.println("===== " + nombre + " =====");
         System.out.println("Sucursales disponibles:");
         for (Sucursal s : sucursales) {
@@ -127,7 +72,7 @@ public class Banco {
     }
 
 
-    public void mostrarTodo () {
+    public void mostrarTodo() {
         System.out.println("===== " + nombre + " =====");
 
         if (sucursales.isEmpty()) {
@@ -139,4 +84,47 @@ public class Banco {
             s.mostrar();
         }
     }
+
+
+
+
+    public String getDatos() {
+        int total = 0;
+        for (Sucursal s : sucursales) total += s.cuentas.size();
+        return nombre + " | Sucursales: " + sucursales.size() + " | Cuentas: " + total;
+    }
+
+    public boolean existeCliente(String sucursal, int dni) {
+        Sucursal s = buscarSucursal(sucursal);
+        if (s == null) return false;
+        return s.buscarCuenta(dni) != null;
+    }
+
+    public double consultarSaldo(String sucursal, int dni) {
+        Sucursal s = buscarSucursal(sucursal);
+        if (s == null) return 0;
+        Cuenta c = s.buscarCuenta(dni);
+        return (c != null) ? c.getSaldo() : 0;
+    }
+
+    public void acreditar(String sucursal, int dni, double monto) {
+        Sucursal s = buscarSucursal(sucursal);
+        if (s == null) return;
+        Cuenta c = s.buscarCuenta(dni);
+        if (c != null) c.depositar(monto);
+    }
+
+    public void debitar(String sucursal, int dni, double monto) {
+        Sucursal s = buscarSucursal(sucursal);
+        if (s == null) return;
+        Cuenta c = s.buscarCuenta(dni);
+        if (c != null) c.retirar(monto);
+    }
+
+    public void cargarDatosPrueba() {
+        // metodo irrelevante llamado por el adaptador, ya que cuenta ya carga los datos
+    }
+
+
+
 }
