@@ -18,7 +18,7 @@ public class MainGrupal {
 
         while (op != 4) {
             System.out.println("\n==== BIENVENIDO A RED BANCARIA PJL GRUPAL ====");
-            System.out.println("1. Ver datos de banco");
+            System.out.println("1. Ver datos de los bancos");
             System.out.println("2. Ver saldo de cliente por banco ,sucursal y Dni");
             System.out.println("3. Transferencia interbancaria");
             System.out.println("4. Salir");
