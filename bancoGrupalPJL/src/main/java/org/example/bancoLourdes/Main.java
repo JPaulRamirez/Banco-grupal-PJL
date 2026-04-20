@@ -54,22 +54,20 @@ public class Main {
                 case 4:
                     admin.balance();
                     break;
-                case 5: // Opción de Retirar.4
+                case 5:
                     System.out.print("CBU: ");
                     String cbuBusqueda = entrada.nextLine();
 
-                    // El HashMap busca el objeto. Si no existe, 'cuentaExtraccion' será null.
                     Cuenta cuentaExtraccion = admin.buscar(cbuBusqueda);
 
                     if (cuentaExtraccion != null) {
-                        // SI EXISTE: Pedimos el monto
+
                         System.out.print("Monto: ");
                         double monto = entrada.nextDouble();
-                        entrada.nextLine(); // Limpieza de buffer
+                        entrada.nextLine();
 
-                        cuentaExtraccion.retirar(monto); // La clase Cuenta valida si tiene saldo
+                        cuentaExtraccion.retirar(monto);
                     } else {
-                        // NO EXISTE: Acá manejamos el error que pediste
                         System.out.println(">>> Error: El CBU [" + cbuBusqueda + "] no existe en el sistema.");
                     }
                     break;

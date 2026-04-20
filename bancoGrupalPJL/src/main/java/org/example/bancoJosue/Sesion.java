@@ -19,21 +19,21 @@ public class Sesion {
     }
 
 
-    // Inicia sesión como admin
+
     public void iniciarComoAdmin() {
         logueado     = true;
         rol          = ROL_ADMIN;
         cuentaActiva = null;
     }
 
-    // Inicia sesión como usuario, guardando su cuenta
+
     public void iniciarComoUsuario(Cuenta cuenta) {
         logueado     = true;
         rol          = ROL_USUARIO;
         cuentaActiva = cuenta;
     }
 
-    // Cierra la sesión actual
+
     public void cerrar() {
         logueado     = false;
         rol          = null;
@@ -41,7 +41,7 @@ public class Sesion {
         System.out.println("Sesión cerrada.");
     }
 
-    // Devuelve true si el logueado es admin
+
     public boolean esAdmin() {
         return logueado && rol.equals(ROL_ADMIN);
     }
