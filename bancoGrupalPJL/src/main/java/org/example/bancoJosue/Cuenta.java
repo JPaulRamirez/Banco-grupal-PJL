@@ -126,4 +126,8 @@ public class Cuenta {
                 + " | " + titular.nombre + " " + titular.apellido
                 + " | " + (activa ? "Activa" : "BAJA"));
     }
+
+    public double getSaldo() {
+        return saldo;
+    }
 }
